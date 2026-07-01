@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Login to Apex IT Command Center - Manage your IT requests and dashboards." />
+  <title>Login - Apex IT Command Center</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+
+<div class="auth-page">
+
+  <!-- Left Visual Panel -->
+  <div class="auth-visual">
+    <!-- Using a tech-oriented abstract background -->
+    <div class="auth-visual-bg" style="background: radial-gradient(circle at top right, rgba(0, 191, 255, 0.1) 0%, var(--bg-darker) 60%);"></div>
+    <div class="auth-visual-overlay"></div>
+    
+    <!-- Subtle tech grid -->
+    <div class="dynamic-lines" style="position: absolute; inset: 0; z-index: 1;"></div>
+
+    <div class="auth-visual-top">
+      <a href="index.html" class="navbar-brand auth-logo" style="text-decoration:none; display: inline-flex; align-items: center; gap: 10px; color: #fff;">
+        <i class="fa-solid fa-mountain-sun" style="font-size: 2.5rem; color: var(--primary-action);"></i>
+        <span style="font-size: 2rem; font-weight: 700;">Stackly</span>
+      </a>
+    </div>
+
+    <div class="auth-visual-bottom">
+      <div class="auth-visual-quote">
+        <blockquote>"Technology is best when it brings people together."</blockquote>
+        <div class="auth-quote-author">
+          <div class="aq-avatar">M</div>
+          <div>
+            <div class="aq-name">Matt Mullenweg</div>
+            <div class="aq-title">Software Engineer</div>
+          </div>
+        </div>
+      </div>
+      <div class="auth-visual-stats">
+        <div class="avs-item">
+          <div class="avs-num">99.9<em>%</em></div>
+          <div class="avs-label">Uptime</div>
+        </div>
+        <div class="avs-item">
+          <div class="avs-num">24<em>/7</em></div>
+          <div class="avs-label">Support</div>
+        </div>
+        <div class="avs-item">
+          <div class="avs-num">10k<em>+</em></div>
+          <div class="avs-label">Tickets Resolved</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Form Panel -->
+  <div class="auth-form-panel">
+
+    <div class="auth-header">
+      <a href="index.html" class="auth-logo d-none d-lg-flex" style="display: none; align-items: center; gap: 10px; text-decoration: none; color: #fff; margin-bottom: 2rem;">
+        <i class="fa-solid fa-mountain-sun" style="font-size: 2rem; color: var(--primary-action);"></i>
+        <span style="font-size: 1.5rem; font-weight: 700;">Apex IT</span>
+      </a>
+      <h1 class="auth-title">Welcome <span class="text-gradient" style="color: var(--secondary-accent);">Back!</span></h1>
+      <p class="auth-subtitle">New to Apex IT? <a href="signup.html">Create a free account</a></p>
+    </div>
+
+    <!-- Role Selector -->
+    <div style="margin-bottom:1.5rem;">
+      <p style="font-size:0.8rem;font-weight:600;color:var(--clr-text);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.75rem;">Login As</p>
+      <div class="role-selector">
+        <label class="role-option">
+          <input type="radio" name="role" id="roleAdmin" value="admin" />
+          <div class="role-label">
+            <i class="fa-solid fa-user-shield"></i>
+            <span>Admin</span>
+            <small>Command Center</small>
+          </div>
+        </label>
+        <label class="role-option">
+          <input type="radio" name="role" id="roleCustomer" value="employee" checked />
+          <div class="role-label">
+            <i class="fa-solid fa-laptop-code"></i>
+            <span>Employee</span>
+            <small>My Tickets</small>
+          </div>
+        </label>
+      </div>
+      <div class="err-msg" id="roleErr" role="alert"></div>
+    </div>
+
+    <form id="loginForm" class="auth-form" novalidate>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email" class="form-label">Email Address</label>
+        <div class="input-wrap" style="position:relative;">
+          <i class="fa-solid fa-envelope" style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--clr-text-muted);pointer-events:none;"></i>
+          <input
+            type="email" id="email" name="email"
+            class="form-control" style="padding-left:2.75rem;"
+            placeholder="you@company.com"
+            autocomplete="email"
+          />
+        </div>
+        <div class="err-msg" id="emailErr" role="alert"></div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <div class="form-row-flex">
+          <label for="password" class="form-label">Password</label>
+          <a href="404.html" class="forgot-link" id="forgotPwdLink">Forgot password?</a>
+        </div>
+        <div class="input-wrap" style="position:relative;">
+          <i class="fa-solid fa-lock" style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--clr-text-muted);pointer-events:none;"></i>
+          <input
+            type="password" id="password" name="password"
+            class="form-control" style="padding-left:2.75rem;padding-right:3rem;"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+          />
+          <button type="button" class="pwd-toggle" aria-label="Toggle password visibility">
+            <i class="fa-solid fa-eye-slash"></i>
+          </button>
+        </div>
+        <div class="err-msg" id="passwordErr" role="alert"></div>
+      </div>
+
+      <!-- Remember -->
+      <label class="check-wrap">
+        <input type="checkbox" id="remember" />
+        <div class="check-box"></div>
+        <span class="check-text">Keep me signed in for 30 days</span>
+      </label>
+
+      <!-- Submit -->
+      <button type="submit" class="btn btn-primary btn-lg btn-full ripple" id="loginSubmitBtn" style="margin-top: 1rem; width: 100%;">
+        <i class="fa-solid fa-right-to-bracket"></i> Login to Dashboard
+      </button>
+    </form>
+
+    <div class="auth-footer-text">
+      Don't have an account? <a href="signup.html">Sign up for free</a>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>
+

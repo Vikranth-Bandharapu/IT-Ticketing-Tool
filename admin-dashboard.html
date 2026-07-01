@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — Apex IT</title>
+  <link rel="icon" href="images/logo.webp" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/gaming.css" />
+  <style>
+    /* ── Overflow fix ── */
+    .dashboard-main { overflow-x: hidden; }
+    .kpi-grid { overflow: visible; }
+    .kpi-grid .kpi-card { min-width: 0; overflow: hidden; }
+    .dashboard-content { overflow-x: hidden; }
+    /* ── Gaming admin enhancements ── */
+    body { overflow-x: hidden; }
+    .dash-page-title h1 { letter-spacing: -0.02em; }
+    /* ── Gaming sidebar logo sticky ── */
+    .sidebar { overflow-y: auto; overflow-x: hidden; }
+    .sidebar-brand { position: sticky; top:0; z-index:10; background: rgba(3,8,4,0.98); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(57,255,20,0.1); }
+    /* ── Gaming dashboard background ── */
+    .dashboard-content { background: rgba(3,8,4,0.3); }
+    /* ── Gaming KPI fix for all viewports ── */
+    @media (max-width: 1300px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 860px)  { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+    /* ── Admin corner tag ── */
+    .sidebar-user-role { display: flex; align-items: center; gap: 0.25rem; font-size: 0.7rem; }
+  </style>
+</head>
+<body>
+
+<div class="dashboard-page">
+
+  <!-- ════════ SIDEBAR ════════ -->
+  <aside class="sidebar" id="sidebar" aria-label="Admin Sidebar">
+    <a href="index.html" class="sidebar-brand">
+      <i class="fa-solid fa-mountain-sun" style="font-size: 1.5rem; color: var(--primary-action);"></i> <span class="sidebar-brand-text" style="margin-left: 0.5rem;">Stackly</span>
+    </a>
+
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar dash-user-avatar-letter">A</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name dash-user-email">admin@Apex IT.in</div>
+        <div class="sidebar-user-role"><i class="fa-solid fa-shield-halved"></i> Administrator</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Admin Navigation">
+      <div class="sidebar-section-label">Main</div>
+
+      <a href="#" class="sidebar-link active" data-section="sec-overview" id="sideOverview">
+        <i class="fa-solid fa-gauge-high"></i>
+        <span class="sidebar-link-text">Dashboard</span>
+      </a>
+      <a href="#" class="sidebar-link" data-section="sec-users" id="sideUsers">
+        <i class="fa-solid fa-users"></i>
+        <span class="sidebar-link-text">Users</span>
+      </a>
+      <a href="#" class="sidebar-link" data-section="sec-Tickets" id="sideTickets">
+        <i class="fa-solid fa-calendar-check"></i>
+        <span class="sidebar-link-text">Tickets</span>
+      </a>
+      <a href="#" class="sidebar-link" data-section="sec-Articles" id="sideArticles">
+        <i class="fa-solid fa-suitcase-rolling"></i>
+        <span class="sidebar-link-text">Knowledge Base</span>
+      </a>
+
+      <div class="sidebar-section-label">Communication</div>
+      <a href="#" class="sidebar-link" data-section="sec-messages" id="sideMessages">
+        <i class="fa-solid fa-envelope"></i>
+        <span class="sidebar-link-text">Messages</span>
+      </a>
+
+      <div class="sidebar-section-label">System</div>
+      <a href="#" class="sidebar-link" data-section="sec-settings" id="sideSettings">
+        <i class="fa-solid fa-gear"></i>
+        <span class="sidebar-link-text">Settings</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="#" class="sidebar-link logout-link logout-btn" id="adminLogout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span class="sidebar-link-text">Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ════════ MAIN CONTENT ════════ -->
+  <main class="dashboard-main" id="dashMain">
+
+    <!-- Topbar -->
+    <header class="dashboard-topbar" style="flex-wrap:wrap;">
+      <div class="topbar-left" style="flex:1;min-width:0;overflow:hidden;">
+        <button class="sidebar-mobile-toggle" id="mobileSidebarToggle" aria-label="Open sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="topbar-greeting" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px;">
+          Welcome back, <strong class="dash-user-email">Admin</strong> <span class="topbar-greeting-sub">👋</span>
+        </div>
+      </div>
+      <div class="topbar-right" style="flex-shrink:0;">
+        <div class="topbar-date">
+          <i class="fa-regular fa-calendar"></i>
+          <span id="topbarDate"></span>
+        </div>
+        <a href="404.html" class="topbar-notification" id="notifBtn" title="Notifications" aria-label="View notifications" style="text-decoration:none;flex-shrink:0;">
+          <i class="fa-solid fa-bell"></i>
+          <div class="notif-badge">3</div>
+        </a>
+        <div style="width:40px;height:40px;background:var(--grad-accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#060d08;font-size:0.95rem;flex-shrink:0;" class="dash-user-avatar-letter">A</div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="dashboard-content">
+
+      <!-- Page Title -->
+      <div class="dash-page-title">
+        <h1 id="dashPageTitle">Dashboard <span class="text-gradient">Overview</span></h1>
+        <p>Welcome to your admin control center. Here's what's happening today.</p>
+      </div>
+
+      <!-- ── SECTION: Overview ── -->
+      <div class="dash-section" id="sec-overview">
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+          <div class="kpi-card" style="--kpi-color:var(--grad-accent);--kpi-icon-bg:rgba(74,222,128,0.12);--kpi-icon-color:var(--clr-accent);">
+            <div class="kpi-header">
+              <div class="kpi-icon"><i class="fa-solid fa-users"></i></div>
+              <div class="kpi-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +12%</div>
+            </div>
+            <div class="kpi-value" data-counter="1248">0</div>
+            <div class="kpi-label">Total Users</div>
+          </div>
+
+          <div class="kpi-card" style="--kpi-color:linear-gradient(135deg,#2d7a4f,#3d9b65);--kpi-icon-bg:rgba(45,122,79,0.15);--kpi-icon-color:#3d9b65;">
+            <div class="kpi-header">
+              <div class="kpi-icon"><i class="fa-solid fa-calendar-check"></i></div>
+              <div class="kpi-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +8%</div>
+            </div>
+            <div class="kpi-value" data-counter="342">0</div>
+            <div class="kpi-label">Total Tickets</div>
+          </div>
+
+          <div class="kpi-card" style="--kpi-color:linear-gradient(135deg,#b07a52,#d4956a);--kpi-icon-bg:rgba(139,94,60,0.15);--kpi-icon-color:#b07a52;">
+            <div class="kpi-header">
+              <div class="kpi-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+              <div class="kpi-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +22%</div>
+            </div>
+            <div class="kpi-value">₹<span data-counter="284">0</span>K</div>
+            <div class="kpi-label">Revenue This Month</div>
+          </div>
+
+          <div class="kpi-card" style="--kpi-color:linear-gradient(135deg,#6b7280,#9ca3af);--kpi-icon-bg:rgba(107,114,128,0.15);--kpi-icon-color:#9ca3af;">
+            <div class="kpi-header">
+              <div class="kpi-icon"><i class="fa-solid fa-suitcase-rolling"></i></div>
+              <div class="kpi-trend down"><i class="fa-solid fa-arrow-trend-down"></i> -2</div>
+            </div>
+            <div class="kpi-value" data-counter="47">0</div>
+            <div class="kpi-label">Active Articles</div>
+          </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div>
+                <div class="chart-card-title">Ticket Statistics</div>
+                <div class="chart-card-subtitle">Monthly Tickets & revenue overview</div>
+              </div>
+              <div class="chart-period-btns">
+                <button class="chart-period-btn active">2026</button>
+                <button class="chart-period-btn">2025</button>
+                <button class="chart-period-btn">All</button>
+              </div>
+            </div>
+            <div class="chart-wrap" style="height:280px;">
+              <canvas id="TicketChart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div>
+                <div class="chart-card-title">User Statistics</div>
+                <div class="chart-card-subtitle">IT Request category popularity</div>
+              </div>
+            </div>
+            <div class="chart-wrap" style="height:280px;">
+              <canvas id="userChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Tickets Table -->
+        <div class="dash-table-card">
+          <div class="dash-table-header">
+            <div class="dash-table-title">Recent Tickets</div>
+            <a href="404.html" class="btn btn-accent-outline btn-sm" onclick="return false;">View All</a>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Ticket ID</th>
+                  <th>Customer</th>
+                  <th>Package</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code style="color:var(--clr-accent);font-size:0.8rem;">#WP-2026-0891</code></td>
+                  <td><strong>Aditya Sharma</strong><br><small style="color:var(--clr-text-muted);">aditya@gmail.com</small></td>
+                  <td>Himalayan Trek — 6D</td>
+                  <td>15 Jul 2026</td>
+                  <td style="color:var(--clr-accent);font-weight:600;">₹8,999</td>
+                  <td><span class="status-badge status-Resolved"><span class="status-dot"></span>Resolved</span></td>
+                </tr>
+                <tr>
+                  <td><code style="color:var(--clr-accent);font-size:0.8rem;">#WP-2026-0890</code></td>
+                  <td><strong>Priya Nair</strong><br><small style="color:var(--clr-text-muted);">priya@outlook.com</small></td>
+                  <td>Rishikesh Rafting — 3D</td>
+                  <td>22 Jul 2026</td>
+                  <td style="color:var(--clr-accent);font-weight:600;">₹4,499</td>
+                  <td><span class="status-badge status-In Progress"><span class="status-dot"></span>In Progress</span></td>
+                </tr>
+                <tr>
+                  <td><code style="color:var(--clr-accent);font-size:0.8rem;">#WP-2026-0889</code></td>
+                  <td><strong>Rahul Mehta</strong><br><small style="color:var(--clr-text-muted);">rahul@yahoo.com</small></td>
+                  <td>Bir Billing Paragliding</td>
+                  <td>5 Aug 2026</td>
+                  <td style="color:var(--clr-accent);font-weight:600;">₹6,999</td>
+                  <td><span class="status-badge status-Resolved"><span class="status-dot"></span>Resolved</span></td>
+                </tr>
+                <tr>
+                  <td><code style="color:var(--clr-accent);font-size:0.8rem;">#WP-2026-0888</code></td>
+                  <td><strong>Sneha Kapoor</strong><br><small style="color:var(--clr-text-muted);">sneha@gmail.com</small></td>
+                  <td>Kashmir Meadows Tour</td>
+                  <td>10 Aug 2026</td>
+                  <td style="color:var(--clr-accent);font-weight:600;">₹14,999</td>
+                  <td><span class="status-badge status-Closed"><span class="status-dot"></span>Closed</span></td>
+                </tr>
+                <tr>
+                  <td><code style="color:var(--clr-accent);font-size:0.8rem;">#WP-2026-0887</code></td>
+                  <td><strong>Vivek Singh</strong><br><small style="color:var(--clr-text-muted);">vivek@company.in</small></td>
+                  <td>Server Maintenance</td>
+                  <td>18 Aug 2026</td>
+                  <td style="color:var(--clr-accent);font-weight:600;">₹5,799</td>
+                  <td><span class="status-badge status-Resolved"><span class="status-dot"></span>Resolved</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="dash-table-card">
+          <div class="dash-table-header">
+            <div class="dash-table-title">Recent Users</div>
+            <a href="404.html" class="btn btn-accent-outline btn-sm" onclick="return false;">View All</a>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Phone</th>
+                  <th>Registered</th>
+                  <th>Tickets</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Aditya Sharma</strong><br><small style="color:var(--clr-text-muted);">aditya@gmail.com</small></td>
+                  <td>+91 98100 12345</td>
+                  <td>10 Jun 2026</td>
+                  <td><strong style="color:var(--clr-accent);">3</strong></td>
+                  <td><span class="status-badge status-Resolved"><span class="status-dot"></span>Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Priya Nair</strong><br><small style="color:var(--clr-text-muted);">priya@outlook.com</small></td>
+                  <td>+91 99877 56789</td>
+                  <td>15 Jun 2026</td>
+                  <td><strong style="color:var(--clr-accent);">1</strong></td>
+                  <td><span class="status-badge status-Resolved"><span class="status-dot"></span>Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Rahul Mehta</strong><br><small style="color:var(--clr-text-muted);">rahul@yahoo.com</small></td>
+                  <td>+91 91234 67890</td>
+                  <td>18 Jun 2026</td>
+                  <td><strong style="color:var(--clr-accent);">2</strong></td>
+                  <td><span class="status-badge status-Resolved"><span class="status-dot"></span>Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Kiran Reddy</strong><br><small style="color:var(--clr-text-muted);">kiran@photo.com</small></td>
+                  <td>+91 87654 32109</td>
+                  <td>20 Jun 2026</td>
+                  <td><strong style="color:var(--clr-accent);">1</strong></td>
+                  <td><span class="status-badge status-In Progress"><span class="status-dot"></span>In Progress</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!-- /sec-overview -->
+
+      <!-- ── SECTION: Users ── -->
+      <div class="dash-section" id="sec-users" style="display:none;">
+        <div class="dash-page-title"><h1>Users <span class="text-gradient">Management</span></h1></div>
+
+        <!-- Stats -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;">
+            <div style="font-size:1.75rem;font-weight:800;color:var(--clr-accent);">1,284</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">Total Users</div></div>
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;">
+            <div style="font-size:1.75rem;font-weight:800;color:#4ade80;">1,102</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">Active</div></div>
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;">
+            <div style="font-size:1.75rem;font-weight:800;color:#60a5fa;">47</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">New This Month</div></div>
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;">
+            <div style="font-size:1.75rem;font-weight:800;color:#f87171;">182</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">Deactivated</div></div>
+        </div>
+
+        <!-- Toolbar -->
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem;">
+          <div style="flex:1;min-width:200px;position:relative;">
+            <i class="fa-solid fa-search" style="position:absolute;left:0.9rem;top:50%;transform:translateY(-50%);color:var(--clr-text-muted);font-size:0.8rem;"></i>
+            <input type="text" placeholder="Search users..." style="width:100%;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-md);padding:0.6rem 0.9rem 0.6rem 2.2rem;color:var(--clr-white);font-size:0.88rem;outline:none;">
+          </div>
+          <select style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-md);padding:0.6rem 1rem;color:var(--clr-white);font-size:0.88rem;outline:none;">
+            <option>All Users</option><option>Active</option><option>Inactive</option>
+          </select>
+          <a href="404.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Add User</a>
+        </div>
+
+        <!-- Table -->
+        <div class="dash-table-card">
+          <div style="overflow-x:auto;">
+            <table class="dash-table">
+              <thead><tr><th>User</th><th>Email</th><th>Phone</th><th>Joined</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div style="display:flex;align-items:center;gap:0.75rem;"><div class="dash-user-avatar-letter" style="width:36px;height:36px;font-size:0.85rem;flex-shrink:0;">A</div><strong>Arjun Mehta</strong></div></td>
+                  <td style="color:var(--clr-text-muted);">arjun@email.com</td><td style="color:var(--clr-text-muted);">+91 98765 43210</td><td style="color:var(--clr-text-muted);">Jan 2025</td>
+                  <td><span class="status-badge status-Resolved"><span class="status-dot"></span>Active</span></td>
+                  <td><a href="404.html" class="btn btn-ghost btn-sm">Edit</a> <a href="404.html" class="btn btn-ghost btn-sm">View</a></td>
+                </tr>
+                <tr>
+                  <td><div style="display:flex;align-items:center;gap:0.75rem;"><div class="dash-user-avatar-letter" style="width:36px;height:36px;font-size:0.85rem;flex-shrink:0;background:linear-gradient(135deg,#7c3aed,#a855f7);">P</div><strong>Priya Sharma</strong></div></td>
+                  <td style="color:var(--clr-text-muted);">priya@email.com</td><td style="color:var(--clr-text-muted);">+91 87654 32109</td><td style="color:var(--clr-text-muted);">Feb 2025</td>
+                  <td><span class="status-badge status-Resolved"><span class="status-dot"></span>Active</span></td>
+                  <td><a href="404.html" class="btn btn-ghost btn-sm">Edit</a> <a href="404.html" class="btn btn-ghost btn-sm">View</a></td>
+                </tr>
+                <tr>
+                  <td><div style="display:flex;align-items:center;gap:0.75rem;"><div class="dash-user-avatar-letter" style="width:36px;height:36px;font-size:0.85rem;flex-shrink:0;background:linear-gradient(135deg,#0891b2,#06b6d4);">R</div><strong>Rohan Das</strong></div></td>
+                  <td style="color:var(--clr-text-muted);">rohan@email.com</td><td style="color:var(--clr-text-muted);">+91 76543 21098</td><td style="color:var(--clr-text-muted);">Mar 2025</td>
+                  <td><span class="status-badge status-Closed"><span class="status-dot"></span>Inactive</span></td>
+                  <td><a href="404.html" class="btn btn-ghost btn-sm">Edit</a> <a href="404.html" class="btn btn-primary btn-sm">Activate</a></td>
+                </tr>
+                <tr>
+                  <td><div style="display:flex;align-items:center;gap:0.75rem;"><div class="dash-user-avatar-letter" style="width:36px;height:36px;font-size:0.85rem;flex-shrink:0;background:linear-gradient(135deg,#b45309,#f59e0b);">N</div><strong>Neha Kapoor</strong></div></td>
+                  <td style="color:var(--clr-text-muted);">neha@email.com</td><td style="color:var(--clr-text-muted);">+91 65432 10987</td><td style="color:var(--clr-text-muted);">Apr 2025</td>
+                  <td><span class="status-badge status-Resolved"><span class="status-dot"></span>Active</span></td>
+                  <td><a href="404.html" class="btn btn-ghost btn-sm">Edit</a> <a href="404.html" class="btn btn-ghost btn-sm">View</a></td>
+                </tr>
+                <tr>
+                  <td><div style="display:flex;align-items:center;gap:0.75rem;"><div class="dash-user-avatar-letter" style="width:36px;height:36px;font-size:0.85rem;flex-shrink:0;background:linear-gradient(135deg,#0f766e,#14b8a6);">V</div><strong>Vikram Singh</strong></div></td>
+                  <td style="color:var(--clr-text-muted);">vikram@email.com</td><td style="color:var(--clr-text-muted);">+91 54321 09876</td><td style="color:var(--clr-text-muted);">May 2025</td>
+                  <td><span class="status-badge status-Resolved"><span class="status-dot"></span>Active</span></td>
+                  <td><a href="404.html" class="btn btn-ghost btn-sm">Edit</a> <a href="404.html" class="btn btn-ghost btn-sm">View</a></td>
+                </tr>
+                <tr>
+                  <td><div style="display:flex;align-items:center;gap:0.75rem;"><div class="dash-user-avatar-letter" style="width:36px;height:36px;font-size:0.85rem;flex-shrink:0;background:linear-gradient(135deg,#be185d,#ec4899);">M</div><strong>Meera Nair</strong></div></td>
+                  <td style="color:var(--clr-text-muted);">meera@email.com</td><td style="color:var(--clr-text-muted);">+91 43210 98765</td><td style="color:var(--clr-text-muted);">Jun 2025</td>
+                  <td><span class="status-badge status-Closed"><span class="status-dot"></span>Inactive</span></td>
+                  <td><a href="404.html" class="btn btn-ghost btn-sm">Edit</a> <a href="404.html" class="btn btn-primary btn-sm">Activate</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 0 0;flex-wrap:wrap;gap:0.75rem;">
+            <span style="font-size:0.82rem;color:var(--clr-text-muted);">Showing 1–6 of 1,284 users</span>
+            <div style="display:flex;gap:0.4rem;">
+              <a href="404.html" class="btn btn-ghost btn-sm">‹ Prev</a>
+              <a href="404.html" class="btn btn-primary btn-sm">1</a>
+              <a href="404.html" class="btn btn-ghost btn-sm">2</a>
+              <a href="404.html" class="btn btn-ghost btn-sm">3</a>
+              <span style="padding:0.4rem 0.5rem;color:var(--clr-text-muted);">...</span>
+              <a href="404.html" class="btn btn-ghost btn-sm">Next ›</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SECTION: Tickets ── -->
+      <div class="dash-section" id="sec-Tickets" style="display:none;">
+        <div class="dash-page-title"><h1>Tickets <span class="text-gradient">Management</span></h1></div>
+
+        <!-- Stats -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;">
+            <div style="font-size:1.75rem;font-weight:800;color:var(--clr-accent);">3,847</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">Total Tickets</div></div>
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;">
+            <div style="font-size:1.75rem;font-weight:800;color:#4ade80;">2,901</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">Resolved</div></div>
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;">
+            <div style="font-size:1.75rem;font-weight:800;color:#fbbf24;">312</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">In Progress</div></div>
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;">
+            <div style="font-size:1.75rem;font-weight:800;color:#f87171;">634</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">Closed</div></div>
+        </div>
+
+        <!-- Toolbar -->
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem;">
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <input type="date" style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-md);padding:0.6rem 0.85rem;color:var(--clr-white);font-size:0.82rem;outline:none;">
+            <span style="color:var(--clr-text-muted);font-size:0.82rem;">to</span>
+            <input type="date" style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-md);padding:0.6rem 0.85rem;color:var(--clr-white);font-size:0.82rem;outline:none;">
+          </div>
+          <select style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-md);padding:0.6rem 1rem;color:var(--clr-white);font-size:0.88rem;outline:none;">
+            <option>All Status</option><option>Resolved</option><option>In Progress</option><option>Closed</option>
+          </select>
+          <a href="404.html" class="btn btn-ghost btn-sm" style="margin-left:auto;"><i class="fa-solid fa-download"></i> Export CSV</a>
+        </div>
+
+        <div class="dash-table-card">
+          <div style="overflow-x:auto;">
+            <table class="dash-table">
+              <thead><tr><th>Ticket ID</th><th>Customer</th><th>Package</th><th>Travel Date</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td><code style="color:var(--clr-accent);font-size:0.78rem;">#WP-2026-1042</code></td><td>Arjun Mehta</td><td>Himalayan Trek 6D</td><td>15 Jul 2026</td><td style="color:var(--clr-accent);font-weight:700;">₹8,999</td><td><span class="status-badge status-Resolved"><span class="status-dot"></span>Resolved</span></td><td><a href="404.html" class="btn btn-ghost btn-sm">View</a> <a href="404.html" class="btn btn-ghost btn-sm" style="color:#f87171;">Cancel</a></td></tr>
+                <tr><td><code style="color:var(--clr-accent);font-size:0.78rem;">#WP-2026-1039</code></td><td>Priya Sharma</td><td>Rishikesh Rafting 3D</td><td>20 Jul 2026</td><td style="color:var(--clr-accent);font-weight:700;">₹4,499</td><td><span class="status-badge status-In Progress"><span class="status-dot"></span>In Progress</span></td><td><a href="404.html" class="btn btn-primary btn-sm">Confirm</a> <a href="404.html" class="btn btn-ghost btn-sm" style="color:#f87171;">Cancel</a></td></tr>
+                <tr><td><code style="color:var(--clr-accent);font-size:0.78rem;">#WP-2026-1028</code></td><td>Rohan Das</td><td>Coorg Forest Escape 4D</td><td>1 Aug 2026</td><td style="color:var(--clr-accent);font-weight:700;">₹6,999</td><td><span class="status-badge status-Resolved"><span class="status-dot"></span>Resolved</span></td><td><a href="404.html" class="btn btn-ghost btn-sm">View</a> <a href="404.html" class="btn btn-ghost btn-sm" style="color:#f87171;">Cancel</a></td></tr>
+                <tr><td><code style="color:var(--clr-accent);font-size:0.78rem;">#WP-2026-1015</code></td><td>Neha Kapoor</td><td>Paragliding Bir Billing</td><td>10 Aug 2026</td><td style="color:var(--clr-accent);font-weight:700;">₹5,499</td><td><span class="status-badge status-In Progress"><span class="status-dot"></span>In Progress</span></td><td><a href="404.html" class="btn btn-primary btn-sm">Confirm</a> <a href="404.html" class="btn btn-ghost btn-sm" style="color:#f87171;">Cancel</a></td></tr>
+                <tr><td><code style="color:var(--clr-accent);font-size:0.78rem;">#WP-2026-0998</code></td><td>Vikram Singh</td><td>Kashmir Meadows 7D</td><td>5 Sep 2026</td><td style="color:var(--clr-accent);font-weight:700;">₹14,999</td><td><span class="status-badge status-Resolved"><span class="status-dot"></span>Resolved</span></td><td><a href="404.html" class="btn btn-ghost btn-sm">View</a> <a href="404.html" class="btn btn-ghost btn-sm" style="color:#f87171;">Cancel</a></td></tr>
+                <tr><td><code style="color:var(--clr-accent);font-size:0.78rem;">#WP-2026-0985</code></td><td>Meera Nair</td><td>Western Ghats Trek 3D</td><td>15 Sep 2026</td><td style="color:var(--clr-accent);font-weight:700;">₹3,999</td><td><span class="status-badge status-Closed"><span class="status-dot"></span>Closed</span></td><td><a href="404.html" class="btn btn-ghost btn-sm">View</a> <a href="404.html" class="btn btn-ghost btn-sm">Refund</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 0 0;flex-wrap:wrap;gap:0.75rem;">
+            <span style="font-size:0.82rem;color:var(--clr-text-muted);">Showing 1–6 of 3,847 Tickets</span>
+            <div style="display:flex;gap:0.4rem;">
+              <a href="404.html" class="btn btn-ghost btn-sm">‹ Prev</a>
+              <a href="404.html" class="btn btn-primary btn-sm">1</a>
+              <a href="404.html" class="btn btn-ghost btn-sm">2</a>
+              <a href="404.html" class="btn btn-ghost btn-sm">3</a>
+              <a href="404.html" class="btn btn-ghost btn-sm">Next ›</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SECTION: Articles ── -->
+      <div class="dash-section" id="sec-Articles" style="display:none;">
+        <div class="dash-page-title"><h1>IT Request <span class="text-gradient">Articles</span></h1></div>
+
+        <!-- Stats -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;"><div style="font-size:1.75rem;font-weight:800;color:var(--clr-accent);">24</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">Total Articles</div></div>
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;"><div style="font-size:1.75rem;font-weight:800;color:#4ade80;">18</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">Active</div></div>
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;"><div style="font-size:1.75rem;font-weight:800;color:#fbbf24;">4</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">Draft</div></div>
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;"><div style="font-size:1.75rem;font-weight:800;color:var(--clr-text-muted);">2</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">Archived</div></div>
+        </div>
+
+        <!-- Toolbar -->
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem;">
+          <div style="flex:1;min-width:200px;position:relative;">
+            <i class="fa-solid fa-search" style="position:absolute;left:0.9rem;top:50%;transform:translateY(-50%);color:var(--clr-text-muted);font-size:0.8rem;"></i>
+            <input type="text" placeholder="Search Articles..." style="width:100%;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-md);padding:0.6rem 0.9rem 0.6rem 2.2rem;color:var(--clr-white);font-size:0.88rem;outline:none;">
+          </div>
+          <a href="404.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Add Package</a>
+        </div>
+
+        <!-- Package Cards Grid -->
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;">
+          <!-- Card 1 -->
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-xl);padding:1.5rem;display:flex;flex-direction:column;gap:1rem;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <span style="background:rgba(74,222,128,0.15);color:var(--clr-accent);font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid rgba(74,222,128,0.3);">🥾 Trekking</span>
+              <span style="background:rgba(74,222,128,0.1);color:var(--clr-accent);font-size:0.72rem;padding:3px 10px;border-radius:999px;">● Active</span>
+            </div>
+            <div><div style="font-size:1.05rem;font-weight:700;color:var(--clr-white);margin-bottom:0.35rem;">Himalayan Base Camp Trek</div>
+              <div style="display:flex;gap:1rem;font-size:0.8rem;color:var(--clr-text-muted);flex-wrap:wrap;">
+                <span><i class="fa-solid fa-clock" style="color:var(--clr-accent);"></i> 10 Days</span>
+                <span><i class="fa-solid fa-signal" style="color:#f97316;"></i> Hard</span>
+                <span><i class="fa-solid fa-indian-rupee-sign" style="color:var(--clr-accent);"></i> 18,999</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:0.5rem;"><a href="404.html" class="btn btn-ghost btn-sm">Edit</a><a href="404.html" class="btn btn-ghost btn-sm">View</a><a href="404.html" class="btn btn-ghost btn-sm" style="margin-left:auto;color:var(--clr-text-muted);">Archive</a></div>
+          </div>
+          <!-- Card 2 -->
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-xl);padding:1.5rem;display:flex;flex-direction:column;gap:1rem;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <span style="background:rgba(96,165,250,0.15);color:#60a5fa;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid rgba(96,165,250,0.3);">🚣 Rafting</span>
+              <span style="background:rgba(74,222,128,0.1);color:var(--clr-accent);font-size:0.72rem;padding:3px 10px;border-radius:999px;">● Active</span>
+            </div>
+            <div><div style="font-size:1.05rem;font-weight:700;color:var(--clr-white);margin-bottom:0.35rem;">Rishikesh IT Request Rush</div>
+              <div style="display:flex;gap:1rem;font-size:0.8rem;color:var(--clr-text-muted);flex-wrap:wrap;">
+                <span><i class="fa-solid fa-clock" style="color:var(--clr-accent);"></i> 5 Days</span>
+                <span><i class="fa-solid fa-signal" style="color:#fbbf24;"></i> Moderate</span>
+                <span><i class="fa-solid fa-indian-rupee-sign" style="color:var(--clr-accent);"></i> 8,499</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:0.5rem;"><a href="404.html" class="btn btn-ghost btn-sm">Edit</a><a href="404.html" class="btn btn-ghost btn-sm">View</a><a href="404.html" class="btn btn-ghost btn-sm" style="margin-left:auto;color:var(--clr-text-muted);">Archive</a></div>
+          </div>
+          <!-- Card 3 -->
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-xl);padding:1.5rem;display:flex;flex-direction:column;gap:1rem;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <span style="background:rgba(167,243,208,0.15);color:#6ee7b7;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid rgba(167,243,208,0.3);">🏕️ Camping</span>
+              <span style="background:rgba(74,222,128,0.1);color:var(--clr-accent);font-size:0.72rem;padding:3px 10px;border-radius:999px;">● Active</span>
+            </div>
+            <div><div style="font-size:1.05rem;font-weight:700;color:var(--clr-white);margin-bottom:0.35rem;">Coorg Forest Escape</div>
+              <div style="display:flex;gap:1rem;font-size:0.8rem;color:var(--clr-text-muted);flex-wrap:wrap;">
+                <span><i class="fa-solid fa-clock" style="color:var(--clr-accent);"></i> 4 Days</span>
+                <span><i class="fa-solid fa-signal" style="color:#4ade80;"></i> Easy</span>
+                <span><i class="fa-solid fa-indian-rupee-sign" style="color:var(--clr-accent);"></i> 6,999</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:0.5rem;"><a href="404.html" class="btn btn-ghost btn-sm">Edit</a><a href="404.html" class="btn btn-ghost btn-sm">View</a><a href="404.html" class="btn btn-ghost btn-sm" style="margin-left:auto;color:var(--clr-text-muted);">Archive</a></div>
+          </div>
+          <!-- Card 4 -->
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-xl);padding:1.5rem;display:flex;flex-direction:column;gap:1rem;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <span style="background:rgba(167,243,208,0.15);color:#34d399;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid rgba(52,211,153,0.3);">🏔️ Trekking</span>
+              <span style="background:rgba(74,222,128,0.1);color:var(--clr-accent);font-size:0.72rem;padding:3px 10px;border-radius:999px;">● Active</span>
+            </div>
+            <div><div style="font-size:1.05rem;font-weight:700;color:var(--clr-white);margin-bottom:0.35rem;">Kashmir Meadows Tour</div>
+              <div style="display:flex;gap:1rem;font-size:0.8rem;color:var(--clr-text-muted);flex-wrap:wrap;">
+                <span><i class="fa-solid fa-clock" style="color:var(--clr-accent);"></i> 7 Days</span>
+                <span><i class="fa-solid fa-signal" style="color:#fbbf24;"></i> Moderate</span>
+                <span><i class="fa-solid fa-indian-rupee-sign" style="color:var(--clr-accent);"></i> 14,999</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:0.5rem;"><a href="404.html" class="btn btn-ghost btn-sm">Edit</a><a href="404.html" class="btn btn-ghost btn-sm">View</a><a href="404.html" class="btn btn-ghost btn-sm" style="margin-left:auto;color:var(--clr-text-muted);">Archive</a></div>
+          </div>
+          <!-- Card 5 -->
+          <div style="background:var(--glass-bg);border:1px solid rgba(251,191,36,0.2);border-radius:var(--r-xl);padding:1.5rem;display:flex;flex-direction:column;gap:1rem;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <span style="background:rgba(74,222,128,0.15);color:var(--clr-accent);font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid rgba(74,222,128,0.3);">🌿 Trekking</span>
+              <span style="background:rgba(251,191,36,0.1);color:#fbbf24;font-size:0.72rem;padding:3px 10px;border-radius:999px;">◐ Draft</span>
+            </div>
+            <div><div style="font-size:1.05rem;font-weight:700;color:var(--clr-white);margin-bottom:0.35rem;">Meghalaya Root Bridge Trek</div>
+              <div style="display:flex;gap:1rem;font-size:0.8rem;color:var(--clr-text-muted);flex-wrap:wrap;">
+                <span><i class="fa-solid fa-clock" style="color:var(--clr-accent);"></i> 6 Days</span>
+                <span><i class="fa-solid fa-signal" style="color:#f97316;"></i> Hard</span>
+                <span><i class="fa-solid fa-indian-rupee-sign" style="color:var(--clr-accent);"></i> 12,999</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:0.5rem;"><a href="404.html" class="btn btn-ghost btn-sm">Edit</a><a href="404.html" class="btn btn-primary btn-sm">Publish</a></div>
+          </div>
+          <!-- Card 6 -->
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-xl);padding:1.5rem;display:flex;flex-direction:column;gap:1rem;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <span style="background:rgba(167,243,208,0.15);color:#6ee7b7;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid rgba(167,243,208,0.3);">🌄 Camping</span>
+              <span style="background:rgba(74,222,128,0.1);color:var(--clr-accent);font-size:0.72rem;padding:3px 10px;border-radius:999px;">● Active</span>
+            </div>
+            <div><div style="font-size:1.05rem;font-weight:700;color:var(--clr-white);margin-bottom:0.35rem;">Server Maintenance</div>
+              <div style="display:flex;gap:1rem;font-size:0.8rem;color:var(--clr-text-muted);flex-wrap:wrap;">
+                <span><i class="fa-solid fa-clock" style="color:var(--clr-accent);"></i> 3 Days</span>
+                <span><i class="fa-solid fa-signal" style="color:#4ade80;"></i> Easy</span>
+                <span><i class="fa-solid fa-indian-rupee-sign" style="color:var(--clr-accent);"></i> 3,999</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:0.5rem;"><a href="404.html" class="btn btn-ghost btn-sm">Edit</a><a href="404.html" class="btn btn-ghost btn-sm">View</a><a href="404.html" class="btn btn-ghost btn-sm" style="margin-left:auto;color:var(--clr-text-muted);">Archive</a></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SECTION: Messages ── -->
+      <div class="dash-section" id="sec-messages" style="display:none;">
+        <div class="dash-page-title"><h1>Customer <span class="text-gradient">Messages</span></h1></div>
+
+        <!-- Stats -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;"><div style="font-size:1.75rem;font-weight:800;color:var(--clr-accent);">47</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">Total Messages</div></div>
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;"><div style="font-size:1.75rem;font-weight:800;color:#f87171;">3</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">Unread</div></div>
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;"><div style="font-size:1.75rem;font-weight:800;color:#4ade80;">38</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">Replied</div></div>
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;text-align:center;"><div style="font-size:1.75rem;font-weight:800;color:#fbbf24;">6</div><div style="font-size:0.78rem;color:var(--clr-text-muted);margin-top:0.25rem;">In Progress Reply</div></div>
+        </div>
+
+        <!-- Toolbar -->
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem;">
+          <div style="flex:1;min-width:200px;position:relative;">
+            <i class="fa-solid fa-search" style="position:absolute;left:0.9rem;top:50%;transform:translateY(-50%);color:var(--clr-text-muted);font-size:0.8rem;"></i>
+            <input type="text" placeholder="Search messages..." style="width:100%;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-md);padding:0.6rem 0.9rem 0.6rem 2.2rem;color:var(--clr-white);font-size:0.88rem;outline:none;">
+          </div>
+          <select style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-md);padding:0.6rem 1rem;color:var(--clr-white);font-size:0.88rem;outline:none;">
+            <option>All</option><option>Unread</option><option>Read</option>
+          </select>
+          <a href="404.html" class="btn btn-ghost btn-sm">Mark All Read</a>
+        </div>
+
+        <!-- Messages List -->
+        <div style="display:flex;flex-direction:column;gap:0.75rem;">
+          <!-- Unread messages -->
+          <div style="background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.15);border-radius:var(--r-lg);padding:1.25rem;display:flex;gap:1rem;align-items:center;">
+            <div class="dash-user-avatar-letter" style="width:42px;height:42px;font-size:0.9rem;flex-shrink:0;">A</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.2rem;">
+                <strong style="color:var(--clr-white);">Arjun Mehta</strong>
+                <span style="font-size:0.75rem;color:var(--clr-text-muted);">2 min ago</span>
+              </div>
+              <div style="font-size:0.85rem;color:var(--clr-accent);margin-bottom:0.15rem;">Group Ticket Request</div>
+              <div style="font-size:0.8rem;color:var(--clr-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">We are a group of 15 people interested in the Himalayan Trek package...</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;flex-shrink:0;">
+              <div style="width:8px;height:8px;background:#f87171;border-radius:50%;"></div>
+              <a href="404.html" class="btn btn-primary btn-sm">Reply</a>
+            </div>
+          </div>
+          <div style="background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.15);border-radius:var(--r-lg);padding:1.25rem;display:flex;gap:1rem;align-items:center;">
+            <div class="dash-user-avatar-letter" style="width:42px;height:42px;font-size:0.9rem;flex-shrink:0;background:linear-gradient(135deg,#be185d,#ec4899);">M</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.2rem;">
+                <strong style="color:var(--clr-white);">Meera Nair</strong>
+                <span style="font-size:0.75rem;color:var(--clr-text-muted);">1 hour ago</span>
+              </div>
+              <div style="font-size:0.85rem;color:var(--clr-accent);margin-bottom:0.15rem;">Cancellation Query</div>
+              <div style="font-size:0.8rem;color:var(--clr-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">I need to cancel my Ticket #WP-2026-0985 due to an emergency and...</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;flex-shrink:0;">
+              <div style="width:8px;height:8px;background:#f87171;border-radius:50%;"></div>
+              <a href="404.html" class="btn btn-primary btn-sm">Reply</a>
+            </div>
+          </div>
+          <div style="background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.15);border-radius:var(--r-lg);padding:1.25rem;display:flex;gap:1rem;align-items:center;">
+            <div class="dash-user-avatar-letter" style="width:42px;height:42px;font-size:0.9rem;flex-shrink:0;background:linear-gradient(135deg,#0891b2,#06b6d4);">R</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.2rem;">
+                <strong style="color:var(--clr-white);">Rohit Kumar</strong>
+                <span style="font-size:0.75rem;color:var(--clr-text-muted);">3 hours ago</span>
+              </div>
+              <div style="font-size:0.85rem;color:var(--clr-accent);margin-bottom:0.15rem;">Custom Itinerary Request</div>
+              <div style="font-size:0.8rem;color:var(--clr-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Can you create a custom 10-day IT Request package for our honeymoon trip...</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;flex-shrink:0;">
+              <div style="width:8px;height:8px;background:#f87171;border-radius:50%;"></div>
+              <a href="404.html" class="btn btn-primary btn-sm">Reply</a>
+            </div>
+          </div>
+          <!-- Read messages -->
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;display:flex;gap:1rem;align-items:center;">
+            <div class="dash-user-avatar-letter" style="width:42px;height:42px;font-size:0.9rem;flex-shrink:0;background:linear-gradient(135deg,#7c3aed,#a855f7);opacity:0.7;">P</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.2rem;">
+                <strong style="color:var(--clr-text-muted);">Priya Sharma</strong>
+                <span style="font-size:0.75rem;color:var(--clr-text-muted);">1 day ago</span>
+              </div>
+              <div style="font-size:0.85rem;color:var(--clr-text-muted);margin-bottom:0.15rem;">Feedback — Rishikesh Trip</div>
+              <div style="font-size:0.8rem;color:var(--clr-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">The trip was absolutely amazing! Our guide Rohan was fantastic...</div>
+            </div>
+            <div style="flex-shrink:0;"><a href="404.html" class="btn btn-ghost btn-sm">View</a></div>
+          </div>
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-lg);padding:1.25rem;display:flex;gap:1rem;align-items:center;">
+            <div class="dash-user-avatar-letter" style="width:42px;height:42px;font-size:0.9rem;flex-shrink:0;background:linear-gradient(135deg,#0f766e,#14b8a6);opacity:0.7;">V</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.2rem;">
+                <strong style="color:var(--clr-text-muted);">Vikram Singh</strong>
+                <span style="font-size:0.75rem;color:var(--clr-text-muted);">2 days ago</span>
+              </div>
+              <div style="font-size:0.85rem;color:var(--clr-text-muted);margin-bottom:0.15rem;">Invoice Request</div>
+              <div style="font-size:0.8rem;color:var(--clr-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Could you please send me the GST invoice for my last Ticket...</div>
+            </div>
+            <div style="flex-shrink:0;"><a href="404.html" class="btn btn-ghost btn-sm">View</a></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SECTION: Settings ── -->
+      <div class="dash-section" id="sec-settings" style="display:none;">
+        <div class="dash-page-title"><h1>System <span class="text-gradient">Settings</span></h1></div>
+        <div style="display:flex;flex-direction:column;gap:1.5rem;">
+
+          <!-- General Settings -->
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-xl);padding:2rem;">
+            <h3 style="margin-bottom:1.5rem;font-size:1rem;display:flex;align-items:center;gap:0.6rem;"><i class="fa-solid fa-sliders" style="color:var(--clr-accent);"></i> General Settings</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+              <div><label style="display:block;font-size:0.8rem;color:var(--clr-text-muted);margin-bottom:0.4rem;">Site Name</label>
+                <input type="text" value="Apex IT" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--glass-border);border-radius:var(--r-md);padding:0.65rem 1rem;color:var(--clr-white);font-size:0.88rem;outline:none;"></div>
+              <div><label style="display:block;font-size:0.8rem;color:var(--clr-text-muted);margin-bottom:0.4rem;">Contact Email</label>
+                <input type="email" value="admin@Apex ITIT Services.in" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--glass-border);border-radius:var(--r-md);padding:0.65rem 1rem;color:var(--clr-white);font-size:0.88rem;outline:none;"></div>
+              <div><label style="display:block;font-size:0.8rem;color:var(--clr-text-muted);margin-bottom:0.4rem;">Support Phone</label>
+                <input type="tel" value="+91 98765 43210" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--glass-border);border-radius:var(--r-md);padding:0.65rem 1rem;color:var(--clr-white);font-size:0.88rem;outline:none;"></div>
+              <div><label style="display:block;font-size:0.8rem;color:var(--clr-text-muted);margin-bottom:0.4rem;">Timezone</label>
+                <select style="width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--glass-border);border-radius:var(--r-md);padding:0.65rem 1rem;color:var(--clr-white);font-size:0.88rem;outline:none;"><option>Asia/Kolkata (IST +5:30)</option><option>UTC</option></select></div>
+            </div>
+            <a href="404.html" class="btn btn-primary btn-sm">Save Changes</a>
+          </div>
+
+          <!-- Notification Settings -->
+          <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:var(--r-xl);padding:2rem;">
+            <h3 style="margin-bottom:1.5rem;font-size:1rem;display:flex;align-items:center;gap:0.6rem;"><i class="fa-solid fa-bell" style="color:var(--clr-accent);"></i> Notification Preferences</h3>
+            <div style="display:flex;flex-direction:column;gap:1rem;">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1rem;background:rgba(255,255,255,0.03);border-radius:var(--r-md);">
+                <div><strong style="color:var(--clr-white);font-size:0.9rem;">New Ticket Alerts</strong><p style="font-size:0.78rem;margin:0;color:var(--clr-text-muted);">Email notification when a new Ticket is placed</p></div>
+                <div style="width:44px;height:24px;background:var(--grad-accent);border-radius:var(--r-full);position:relative;cursor:pointer;flex-shrink:0;"><div style="width:20px;height:20px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1rem;background:rgba(255,255,255,0.03);border-radius:var(--r-md);">
+                <div><strong style="color:var(--clr-white);font-size:0.9rem;">Cancellation Alerts</strong><p style="font-size:0.78rem;margin:0;color:var(--clr-text-muted);">SMS alert when a Ticket is Closed</p></div>
+                <div style="width:44px;height:24px;background:var(--grad-accent);border-radius:var(--r-full);position:relative;cursor:pointer;flex-shrink:0;"><div style="width:20px;height:20px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1rem;background:rgba(255,255,255,0.03);border-radius:var(--r-md);">
+                <div><strong style="color:var(--clr-white);font-size:0.9rem;">Weekly Revenue Report</strong><p style="font-size:0.78rem;margin:0;color:var(--clr-text-muted);">Email digest every Monday with revenue summary</p></div>
+                <div style="width:44px;height:24px;background:rgba(255,255,255,0.1);border-radius:var(--r-full);position:relative;cursor:pointer;flex-shrink:0;"><div style="width:20px;height:20px;background:white;border-radius:50%;position:absolute;left:2px;top:2px;"></div></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1rem;background:rgba(255,255,255,0.03);border-radius:var(--r-md);">
+                <div><strong style="color:var(--clr-white);font-size:0.9rem;">New User Registrations</strong><p style="font-size:0.78rem;margin:0;color:var(--clr-text-muted);">Alert when a new user signs up on the platform</p></div>
+                <div style="width:44px;height:24px;background:var(--grad-accent);border-radius:var(--r-full);position:relative;cursor:pointer;flex-shrink:0;"><div style="width:20px;height:20px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Danger Zone -->
+          <div style="background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.25);border-radius:var(--r-xl);padding:2rem;">
+            <h3 style="margin-bottom:1.5rem;font-size:1rem;color:#f87171;display:flex;align-items:center;gap:0.6rem;"><i class="fa-solid fa-triangle-exclamation"></i> Danger Zone</h3>
+            <div style="display:flex;flex-direction:column;gap:1rem;">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1rem;background:rgba(255,255,255,0.02);border-radius:var(--r-md);flex-wrap:wrap;gap:0.75rem;">
+                <div><strong style="color:var(--clr-white);font-size:0.9rem;">Clear All Cache</strong><p style="font-size:0.78rem;margin:0;color:var(--clr-text-muted);">Remove cached data to refresh site content</p></div>
+                <a href="404.html" class="btn btn-sm" style="background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.3);">Clear Cache</a>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1rem;background:rgba(255,255,255,0.02);border-radius:var(--r-md);flex-wrap:wrap;gap:0.75rem;">
+                <div><strong style="color:var(--clr-white);font-size:0.9rem;">Export All Data</strong><p style="font-size:0.78rem;margin:0;color:var(--clr-text-muted);">Download full backup of all users and Tickets</p></div>
+                <a href="404.html" class="btn btn-sm" style="background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.3);">Export</a>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1rem;background:rgba(255,255,255,0.02);border-radius:var(--r-md);flex-wrap:wrap;gap:0.75rem;">
+                <div><strong style="color:#f87171;font-size:0.9rem;">Reset to Defaults</strong><p style="font-size:0.78rem;margin:0;color:var(--clr-text-muted);">⚠️ This will wipe all custom settings permanently</p></div>
+                <a href="404.html" class="btn btn-sm" style="background:#f87171;color:#fff;border:none;">Reset</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /dashboard-content -->
+  </main>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
+
+
+

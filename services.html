@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | Apex Command Center</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  
+  <div class="sports-background"></div>
+  <div class="dynamic-lines"></div>
+
+  <header>
+    <div class="container nav-container">
+      <nav>
+        <a href="index.html" class="logo" style="display:flex; align-items:center;"><img src="assets/logo.webp" alt="Apex IT Logo" style="height: 40px; margin-right: 10px;"> </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html" class="active">Services</a></li>
+          <li><a href="knowledge-base.html">Knowledge Base</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-outline">Login</a>
+          <a href="signup.html" class="btn btn-primary">Sign Up</a>
+        </div>
+        <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+      </nav>
+    </div>
+  </header>
+
+  <main style="padding-top: 100px;">
+    <!-- 1. Hero -->
+    <section class="hero text-center" style="min-height: 50vh;">
+      <div class="container">
+        <h1 data-aos="zoom-in">Extreme IT Services</h1>
+        <p data-aos="fade-up" data-aos-delay="200" style="max-width: 600px; margin: 0 auto; color: #fff;">High-performance solutions tailored for enterprise infrastructure, mapped intuitively in our command center.</p>
+      </div>
+    </section>
+
+    <!-- 2. IT Services -->
+    <section id="it-services">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-down">Enterprise Solutions</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+          <div class="glass-card" data-aos="slide-right">
+            <h3>Infrastructure Management</h3>
+            <p>End-to-end monitoring and maintenance of your servers, networks, and endpoints.</p>
+          </div>
+          <div class="glass-card" data-aos="zoom-in" data-aos-delay="100">
+            <h3>Cloud Integration</h3>
+            <p>Seamless migration and management of multi-cloud environments.</p>
+          </div>
+          <div class="glass-card" data-aos="slide-left" data-aos-delay="200">
+            <h3>Cybersecurity Operations</h3>
+            <p>24/7 threat detection, vulnerability assessments, and incident response.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Ticket Categories -->
+    <section id="categories">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-down">Support Categories</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+          <div class="glass-card text-center" data-aos="flip-up"><i class="fa-solid fa-network-wired" style="font-size: 2.5rem; color: var(--secondary-accent); margin-bottom: 1rem;"></i><h4>Network</h4></div>
+          <div class="glass-card text-center" data-aos="flip-up" data-aos-delay="100"><i class="fa-solid fa-desktop" style="font-size: 2.5rem; color: var(--secondary-accent); margin-bottom: 1rem;"></i><h4>Hardware</h4></div>
+          <div class="glass-card text-center" data-aos="flip-up" data-aos-delay="200"><i class="fa-brands fa-windows" style="font-size: 2.5rem; color: var(--secondary-accent); margin-bottom: 1rem;"></i><h4>Software</h4></div>
+          <div class="glass-card text-center" data-aos="flip-up" data-aos-delay="300"><i class="fa-solid fa-key" style="font-size: 2.5rem; color: var(--secondary-accent); margin-bottom: 1rem;"></i><h4>Access</h4></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SLA Overview -->
+    <section id="sla">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-down">SLA Commitments</h2>
+        <div class="glass-card" data-aos="zoom-in-up">
+          <div style="overflow-x: auto; width: 100%;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; min-width: 500px;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--primary-action);">
+                <th style="padding: 1rem;">Priority</th>
+                <th style="padding: 1rem;">Response Time</th>
+                <th style="padding: 1rem;">Resolution Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 1rem;"><span class="badge badge-high">Critical</span></td>
+                <td style="padding: 1rem;">15 Minutes</td>
+                <td style="padding: 1rem;">4 Hours</td>
+              </tr>
+              <tr>
+                <td style="padding: 1rem;"><span class="badge badge-open">High</span></td>
+                <td style="padding: 1rem;">1 Hour</td>
+                <td style="padding: 1rem;">8 Hours</td>
+              </tr>
+              <tr>
+                <td style="padding: 1rem;"><span class="badge badge-progress">Medium</span></td>
+                <td style="padding: 1rem;">4 Hours</td>
+                <td style="padding: 1rem;">24 Hours</td>
+              </tr>
+              <tr>
+                <td style="padding: 1rem;"><span class="badge badge-resolved">Low</span></td>
+                <td style="padding: 1rem;">8 Hours</td>
+                <td style="padding: 1rem;">48 Hours</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Automation Features -->
+    <section id="automation">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-down">Smart Automation</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+          <div class="glass-card" data-aos="flip-left">
+            <h4>Auto-Routing</h4>
+            <p>Tickets are instantly assigned to the appropriate department based on keywords and category.</p>
+          </div>
+          <div class="glass-card" data-aos="flip-left" data-aos-delay="100">
+            <h4>Approval Workflows</h4>
+            <p>Automatic multi-tier approval requests for access and hardware requests.</p>
+          </div>
+          <div class="glass-card" data-aos="flip-left" data-aos-delay="200">
+            <h4>SLA Escalation</h4>
+            <p>Automatic priority bumping and manager alerts when SLAs are near breach.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CTA -->
+    <section class="contact-cta text-center" style="padding-bottom: 5rem;">
+      <div class="container">
+        <div class="glass-card" data-aos="zoom-in" style="border: 2px solid var(--primary-action);">
+          <h2>Ready to optimize your workflow?</h2>
+          <p style="margin-bottom: 2rem;">Join the Apex Command Center today.</p>
+          <a href="signup.html" class="btn btn-primary">Create an Account</a>
+        </div>
+      </div>
+    </section>
+    <!-- New Sections (Testimonials, Integrations, FAQ) -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-down">Field Reports</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+          <div class="glass-card testimonial-card" data-aos="zoom-in" data-aos-delay="100">
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <p>"Apex Command Center drastically reduced our hardware provisioning time. The automated routing is incredibly sharp."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">JD</div>
+              <div class="author-info">
+                <h4>Jane Doe</h4>
+                <p>CTO, Alpine Enterprises</p>
+              </div>
+            </div>
+          </div>
+          <div class="glass-card testimonial-card" data-aos="zoom-in" data-aos-delay="200">
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <p>"We handle 500+ daily tickets. This platform's extreme visibility and rapid SLA alerts saved us from major outages."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">MS</div>
+              <div class="author-info">
+                <h4>Mike Smith</h4>
+                <p>IT Director, Peak Solutions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="integrations text-center" id="integrations">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-down">Supported Gear</h2>
+        <p data-aos="fade-up" style="color: #aaa; margin-bottom: 2rem;">Seamlessly tracking and integrating with your entire tech stack.</p>
+        <div class="integrations-scroll" data-aos="zoom-in-up">
+          <div class="integration-item"><i class="fa-brands fa-windows"></i> Windows</div>
+          <div class="integration-item"><i class="fa-brands fa-apple"></i> macOS</div>
+          <div class="integration-item"><i class="fa-brands fa-linux"></i> Linux</div>
+          <div class="integration-item"><i class="fa-brands fa-aws"></i> AWS</div>
+          <div class="integration-item"><i class="fa-solid fa-network-wired"></i> Cisco</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="container" style="max-width: 800px;">
+        <h2 class="section-title" data-aos="fade-down">Intel & Briefings (FAQ)</h2>
+        <div class="faq-list" data-aos="fade-up">
+          <div class="faq-item">
+            <button class="faq-question">How fast is the SLA response time? <i class="fa-solid fa-plus faq-icon"></i></button>
+            <div class="faq-answer">
+              <p style="padding-top: 1rem;">Critical priority tickets trigger immediate alerts with a mandatory 15-minute response SLA. Normal tickets guarantee a 4-hour response.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Can employees submit tickets without logging in? <i class="fa-solid fa-plus faq-icon"></i></button>
+            <div class="faq-answer">
+              <p style="padding-top: 1rem;">Security is our top priority. All field agents and employees must authenticate via the portal before transmitting a service request.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Does it support automated asset discovery? <i class="fa-solid fa-plus faq-icon"></i></button>
+            <div class="faq-answer">
+              <p style="padding-top: 1rem;">Yes, the platform integrates natively with AD and leading MDM solutions to keep your hardware and software inventory in perfect sync.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col">
+          <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-flex; align-items:center;"><img src="assets/logo.webp" alt="Apex IT Logo" style="height: 40px; margin-right: 10px;"></a>
+          <p>Enterprise IT Ticketing engineered for extreme performance.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="knowledge-base.html">Knowledge Base</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Portal</h4>
+          <ul>
+            <li><a href="404.html">Login</a></li>
+            <li><a href="404.html">Sign Up</a></li>
+            <li><a href="404.html">Submit Ticket</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <p><i class="fa-solid fa-envelope"></i> support@stackly.com</p>
+          <p><i class="fa-solid fa-phone"></i> 9182736450</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 Stackly. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
+

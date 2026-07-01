@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | Apex Command Center</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  
+  <div class="sports-background"></div>
+  <div class="dynamic-lines"></div>
+
+  <div class="auth-section">
+    <div class="glass-card auth-card" data-aos="zoom-in-up" style="max-width: 600px;">
+      <a href="index.html" class="logo" style="justify-content: center; margin-bottom: 2rem;">
+        <i class="fa-solid fa-mountain-sun" style="font-size: 2.5rem;"></i> <span style="font-size: 2.5rem;">Stackly</span>
+      </a>
+      
+      <h2 style="margin-bottom: 0.5rem; color: var(--text-light);">Create Account</h2>
+      <p style="margin-bottom: 2rem;">Join the command center to manage your IT requests.</p>
+
+      <form id="signupForm" class="grid-2-col" style="text-align: left;">
+        
+        <div class="form-group" style="grid-column: span 2;">
+          <label>Full Name</label>
+          <input type="text" name="name" class="form-control" placeholder="John Doe" required>
+          <span class="error-msg"></span>
+        </div>
+        
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" class="form-control" placeholder="john@company.com" required>
+          <span class="error-msg"></span>
+        </div>
+        
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" name="phone" class="form-control" placeholder="+1 (555) 000-0000" required>
+          <span class="error-msg"></span>
+        </div>
+
+        <div class="form-group" style="grid-column: span 2;">
+          <label>Department</label>
+          <select name="department" class="form-control" required>
+            <option value="">Select Department</option>
+            <option value="hr">Human Resources</option>
+            <option value="finance">Finance</option>
+            <option value="engineering">Engineering</option>
+            <option value="marketing">Marketing</option>
+            <option value="sales">Sales</option>
+          </select>
+          <span class="error-msg"></span>
+        </div>
+        
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" class="form-control check-strength" placeholder="Min 8 chars" required>
+          <span class="error-msg"></span>
+        </div>
+        
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password" name="confirmPassword" class="form-control" placeholder="Confirm password" required>
+          <span class="error-msg"></span>
+        </div>
+
+        <div style="grid-column: span 2;">
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Sign Up</button>
+        </div>
+      </form>
+
+      <p style="margin-top: 1.5rem;">Already have an account? <a href="login.html" style="color: var(--secondary-accent); text-decoration: none; font-weight: 700;">Login</a></p>
+    </div>
+  </div>
+
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      setTimeout(() => {
+        if (!e.defaultPrevented) {
+          e.preventDefault();
+          
+          const name = document.querySelector('input[name="name"]').value;
+          const email = document.querySelector('input[name="email"]').value;
+          const phone = document.querySelector('input[name="phone"]').value;
+          const department = document.querySelector('select[name="department"]').value;
+          const password = document.querySelector('input[name="password"]').value;
+          
+          // Get existing users
+          let users = JSON.parse(localStorage.getItem('users')) || [];
+          
+          // Check if email already exists
+          if (users.find(u => u.email === email)) {
+            alert('Email already registered!');
+            return;
+          }
+          
+          // Add new user
+          const newUser = {
+            name, email, phone, department, password,
+            role: 'employee' // default role for signups
+          };
+          users.push(newUser);
+          localStorage.setItem('users', JSON.stringify(users));
+          
+          alert('Account created successfully! Please login.');
+          window.location.href = 'login.html';
+        }
+      }, 50);
+    });
+  </script>
+</body>
+</html>
+
