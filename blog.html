@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Apex Command Center</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .blog-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 0;
+      overflow: hidden;
+    }
+    .blog-image {
+      height: 200px;
+      background: linear-gradient(135deg, var(--bg-dark), rgba(59, 130, 246, 0.2));
+      border-bottom: 2px solid var(--primary-action);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: rgba(255, 255, 255, 0.1);
+    }
+    .blog-content {
+      padding: 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--secondary-accent);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+    .blog-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    .blog-excerpt {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+    .read-more {
+      align-self: flex-start;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+    }
+    .read-more i {
+      transition: transform 0.3s ease;
+    }
+    .read-more:hover i {
+      transform: translateX(5px);
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="sports-background"></div>
+  <div class="dynamic-lines"></div>
+
+  <header>
+    <div class="container nav-container">
+      <nav>
+        <a href="index.html" class="logo" style="display:flex; align-items:center;"><img src="assets/logo.webp" alt="Apex IT Logo" style="height: 40px; margin-right: 10px;"> </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="knowledge-base.html">Knowledge Base</a></li>
+          <li><a href="blog.html" class="active">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-outline">Login</a>
+          <a href="signup.html" class="btn btn-primary">Sign Up</a>
+        </div>
+        <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+      </nav>
+    </div>
+  </header>
+
+    <main style="padding-top: 100px;">
+    <!-- Hero -->
+    <section class="hero text-center" style="min-height: 40vh;">
+      <div class="container">
+        <h1 data-aos="zoom-in">Tech Insights & Updates</h1>
+        <p data-aos="fade-up" data-aos-delay="200" style="max-width: 600px; margin: 0 auto; color: #fff;">Stay ahead of the curve with the latest enterprise IT trends, infrastructure tips, and Apex Command Center release notes.</p>
+      </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        
+        <!-- Categories Filter -->
+        <div id="category-filters" style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem;" data-aos="fade-up">
+          <button class="filter-btn btn btn-primary" onclick="filterCategory('all')" style="padding: 0.5rem 1.5rem; border-radius: 20px;">All</button>
+          <button class="filter-btn btn btn-outline" onclick="filterCategory('infrastructure')" style="padding: 0.5rem 1.5rem; border-radius: 20px;">Infrastructure</button>
+          <button class="filter-btn btn btn-outline" onclick="filterCategory('security')" style="padding: 0.5rem 1.5rem; border-radius: 20px;">Security</button>
+          <button class="filter-btn btn btn-outline" onclick="filterCategory('cloud')" style="padding: 0.5rem 1.5rem; border-radius: 20px;">Cloud</button>
+          <button class="filter-btn btn btn-outline" onclick="filterCategory('management')" style="padding: 0.5rem 1.5rem; border-radius: 20px;">Management</button>
+          <button class="filter-btn btn btn-outline" onclick="filterCategory('updates')" style="padding: 0.5rem 1.5rem; border-radius: 20px;">Updates</button>
+        </div>
+
+        <div class="blog-grid" id="blog-grid">
+          
+          <article class="glass-card blog-card" data-category="infrastructure" data-aos="fade-up">
+            <div class="blog-image"><i class="fa-solid fa-server"></i></div>
+            <div class="blog-content">
+              <div class="blog-meta"><span>Infrastructure</span><span>Oct 15, 2026</span></div>
+              <h3 class="blog-title">Optimizing Server Load Balancing for Peak Performance</h3>
+              <p class="blog-excerpt">Discover how modern AI-driven load balancing algorithms can reduce server downtime by 40% during unexpected traffic spikes in enterprise environments.</p>
+              <a href="404.html" class="text-action read-more">Read Full Article <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></a>
+            </div>
+          </article>
+
+          <article class="glass-card blog-card" data-category="security" data-aos="fade-up" data-aos-delay="100">
+            <div class="blog-image"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="blog-content">
+              <div class="blog-meta"><span>Security</span><span>Oct 08, 2026</span></div>
+              <h3 class="blog-title">Zero Trust Architecture: The New Standard</h3>
+              <p class="blog-excerpt">Why traditional VPNs are becoming obsolete and how implementing a Zero Trust model secures your remote workforce efficiently without compromising speed.</p>
+              <a href="404.html" class="text-action read-more">Read Full Article <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></a>
+            </div>
+          </article>
+
+          <article class="glass-card blog-card" data-category="updates" data-aos="fade-up" data-aos-delay="200">
+            <div class="blog-image"><i class="fa-solid fa-code-merge"></i></div>
+            <div class="blog-content">
+              <div class="blog-meta"><span>Updates</span><span>Sep 29, 2026</span></div>
+              <h3 class="blog-title">Apex Command Center v2.4 Release Notes</h3>
+              <p class="blog-excerpt">We've just rolled out the biggest update to the Command Center this year. Check out the new SLA automation rules, responsive dashboard, and enhanced reporting.</p>
+              <a href="404.html" class="text-action read-more">Read Full Article <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></a>
+            </div>
+          </article>
+
+          <article class="glass-card blog-card" data-category="cloud" data-aos="fade-up" data-aos-delay="0">
+            <div class="blog-image"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+            <div class="blog-content">
+              <div class="blog-meta"><span>Cloud</span><span>Sep 14, 2026</span></div>
+              <h3 class="blog-title">Seamless Hybrid Cloud Migrations</h3>
+              <p class="blog-excerpt">Migrating legacy systems doesn't have to be a nightmare. Learn our top strategies for hybrid integrations utilizing containerized microservices.</p>
+              <a href="404.html" class="text-action read-more">Read Full Article <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></a>
+            </div>
+          </article>
+
+          <article class="glass-card blog-card" data-category="management" data-aos="fade-up" data-aos-delay="100">
+            <div class="blog-image"><i class="fa-solid fa-users-gear"></i></div>
+            <div class="blog-content">
+              <div class="blog-meta"><span>Management</span><span>Sep 02, 2026</span></div>
+              <h3 class="blog-title">Reducing Ticket Resolution Time</h3>
+              <p class="blog-excerpt">A deep dive into how automated ticket routing and self-service knowledge bases can drastically improve your IT department's MTTR (Mean Time To Resolution).</p>
+              <a href="404.html" class="text-action read-more">Read Full Article <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></a>
+            </div>
+          </article>
+
+          <article class="glass-card blog-card" data-category="development" data-aos="fade-up" data-aos-delay="200">
+            <div class="blog-image"><i class="fa-solid fa-laptop-code"></i></div>
+            <div class="blog-content">
+              <div class="blog-meta"><span>Development</span><span>Aug 21, 2026</span></div>
+              <h3 class="blog-title">Building Scalable Internal APIs</h3>
+              <p class="blog-excerpt">Best practices for structuring REST and GraphQL APIs for internal tooling, focusing on rate limiting, security tokens, and comprehensive documentation.</p>
+              <a href="404.html" class="text-action read-more">Read Full Article <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></a>
+            </div>
+          </article>
+        </div>
+        <p id="no-results" style="display: none; text-align: center; color: var(--text-muted); margin-top: 2rem;">No articles found for this category.</p>
+      </div>
+    </section>
+
+    <!-- Section 1: Featured Author -->
+    <section class="section" style="background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+      <div class="container">
+        <h2 class="section-title text-center" data-aos="fade-down">Meet the Editor</h2>
+        <div class="glass-card" data-aos="zoom-in" style="max-width: 800px; margin: 0 auto; display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+          <div style="width: 120px; height: 120px; border-radius: 50%; background: var(--primary-action); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #fff; flex-shrink: 0; margin: 0 auto;">
+            <i class="fa-solid fa-user-tie"></i>
+          </div>
+          <div style="flex: 1; min-width: 250px; text-align: center;">
+            <h3 style="color: #fff; margin-bottom: 0.5rem;">Dr. Alan Turing</h3>
+            <p style="color: var(--secondary-accent); font-weight: bold; margin-bottom: 1rem;">Chief Infrastructure Officer</p>
+            <p style="color: var(--text-muted);">With over 15 years of experience in enterprise systems, Alan leads our content team to bring you the most actionable, highly-technical IT strategies.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Whitepaper Promo -->
+    <section class="section">
+      <div class="container">
+        <div class="grid-2-col" style="align-items: center;">
+          <div data-aos="fade-right">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Free Whitepaper</h2>
+            <h3 style="color: var(--secondary-accent); margin-bottom: 1.5rem;">"The 2027 IT Infrastructure Blueprint"</h3>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Download our comprehensive 40-page guide on migrating legacy enterprise architectures to modern, scalable cloud environments safely.</p>
+            <a href="404.html" class="btn btn-primary"><i class="fa-solid fa-download" style="margin-right: 8px;"></i> Download Now</a>
+          </div>
+          <div data-aos="fade-left" style="display: flex; justify-content: center;">
+            <div class="glass-card" style="padding: 4rem 2rem; background: linear-gradient(45deg, rgba(59,130,246,0.1), rgba(16,185,129,0.1)); border-color: var(--primary-action); text-align: center;">
+              <i class="fa-solid fa-file-pdf" style="font-size: 5rem; color: var(--primary-action);"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Upcoming Webinars -->
+    <section class="section" style="background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+      <div class="container">
+        <h2 class="section-title text-center" data-aos="fade-down">Upcoming Webinars</h2>
+        <div class="grid-2-col">
+          <div class="glass-card" data-aos="fade-up">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+              <span style="color: var(--secondary-accent); font-weight: bold;"><i class="fa-regular fa-calendar" style="margin-right: 5px;"></i> Nov 12, 2026</span>
+              <span style="color: var(--text-muted);"><i class="fa-regular fa-clock" style="margin-right: 5px;"></i> 2:00 PM EST</span>
+            </div>
+            <h3 style="color: #fff; margin-bottom: 1rem;">Mastering Automated SLA Tracking</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Join our product specialists for a live walkthrough of the new automation features in Apex Command Center.</p>
+            <a href="404.html" class="text-action" style="font-weight: bold;">Register for Free <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></a>
+          </div>
+          <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+              <span style="color: var(--secondary-accent); font-weight: bold;"><i class="fa-regular fa-calendar" style="margin-right: 5px;"></i> Nov 25, 2026</span>
+              <span style="color: var(--text-muted);"><i class="fa-regular fa-clock" style="margin-right: 5px;"></i> 1:00 PM EST</span>
+            </div>
+            <h3 style="color: #fff; margin-bottom: 1rem;">Cybersecurity Best Practices Q&A</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">An open floor Q&A session with our lead security engineers covering Zero Trust and threat mitigation.</p>
+            <a href="404.html" class="text-action" style="font-weight: bold;">Register for Free <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="section" style="padding-bottom: 4rem;">
+      <div class="container">
+        <div class="glass-card" data-aos="zoom-in" style="text-align: center; max-width: 800px; margin: 0 auto; border-color: var(--secondary-accent);">
+          <i class="fa-solid fa-envelope-open-text" style="font-size: 3rem; color: var(--secondary-accent); margin-bottom: 1.5rem;"></i>
+          <h2 style="color: #fff; margin-bottom: 1rem;">Subscribe to Our Newsletter</h2>
+          <p style="color: var(--text-muted); margin-bottom: 2rem;">Get the latest updates, enterprise IT strategies, and command center tutorials delivered straight to your inbox every month.</p>
+          <form action="404.html" method="GET" style="display: flex; gap: 1rem; max-width: 500px; margin: 0 auto; flex-wrap: wrap;">
+            <input type="email" placeholder="Enter your email address" class="form-control" style="flex: 1; min-width: 200px;" required>
+            <button type="submit" class="btn btn-primary" style="white-space: nowrap;">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col">
+          <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-flex; align-items:center;"><img src="assets/logo.webp" alt="Apex IT Logo" style="height: 40px; margin-right: 10px;"></a>
+          <p>Enterprise IT Ticketing engineered for extreme performance.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="knowledge-base.html">Knowledge Base</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Portal</h4>
+          <ul>
+            <li><a href="404.html">Login</a></li>
+            <li><a href="404.html">Sign Up</a></li>
+            <li><a href="404.html">Submit Ticket</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <p><i class="fa-solid fa-envelope"></i> support@stackly.com</p>
+          <p><i class="fa-solid fa-phone"></i> 9876543210</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 stackly. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function filterCategory(category) {
+      const cards = document.querySelectorAll('.blog-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+      const noResults = document.getElementById('no-results');
+      let visibleCount = 0;
+
+      // Update active button state
+      buttons.forEach(btn => {
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-outline');
+        if (btn.getAttribute('onclick') === `filterCategory('${category}')`) {
+          btn.classList.remove('btn-outline');
+          btn.classList.add('btn-primary');
+        }
+      });
+
+      // Filter cards
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Show 'no results' message if needed
+      if (visibleCount === 0) {
+        noResults.style.display = 'block';
+      } else {
+        noResults.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
+
+

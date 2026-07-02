@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 - Wipeout! | Apex Command Center</title>
+  <title>404 - System Offline | Apex Command Center</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -38,11 +38,14 @@
 
   <div class="error-404-section">
     <div class="glass-card" style="max-width: 600px; width: 100%; border: 2px solid var(--primary-action);" data-aos="zoom-in">
-      <div class="error-icon"><i class="fa-solid fa-person-falling"></i></div>
+      <div class="error-icon"><i class="fa-solid fa-server"></i></div>
       <h1 style="font-size: 5rem; margin-bottom: 0; color: #fff; font-style: normal;">404</h1>
-      <h2 style="color: var(--secondary-accent); margin-bottom: 1.5rem;">Total Wipeout!</h2>
-      <p style="font-size: 1.1rem; margin-bottom: 2rem;">Oops! You've veered off the trail. The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
-      <a href="index.html" class="btn btn-primary"><i class="fa-solid fa-house" style="margin-right: 8px;"></i> Return to Basecamp</a>
+      <h2 style="color: var(--secondary-accent); margin-bottom: 1.5rem;">System Offline</h2>
+      <p style="font-size: 1.1rem; margin-bottom: 2rem;">Oops! Connection lost. The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <button onclick="window.history.back()" class="btn btn-outline" style="cursor: pointer;"><i class="fa-solid fa-arrow-left" style="margin-right: 8px;"></i> Go Back</button>
+        <a href="index.html" class="btn btn-primary"><i class="fa-solid fa-house" style="margin-right: 8px;"></i> Return Home</a>
+      </div>
     </div>
   </div>
 
@@ -50,4 +53,6 @@
   <script src="js/main.js"></script>
 </body>
 </html>
+
+
 
